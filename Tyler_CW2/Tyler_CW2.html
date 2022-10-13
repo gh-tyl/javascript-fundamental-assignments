@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        td,
+        th {
+            border: solid 1px;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text" placeholder="write product name" />
+    <input type="text" placeholder="write product price" />
+    <input type="text" placeholder="write product amount" />
+    <button type="button">Add</button>
+    <table>
+        <thead>
+            <tr>
+                <th>Row#</th>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Amount</th>
+                <th>Total</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4" align="right">
+                    <h2>Total Price:</h2>
+                </td>
+                <td colspan="2"></td>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+<script>
+    let inputList = document.getElementsByTagName("input")
+    let inputName = inputList[0]
+    let inputPrice = inputList[1]
+    let inputAmount = inputList[2]
+    let button = document.getElementsByTagName("button")[0]
+    button.onclick = function () { addItem() }
+
+    let tbody = document.getElementsByTagName("tbody")[0]
+    let tfoot = document.getElementsByTagName("tfoot")[0]
+    let tdTotalPrice = tfoot.getElementsByTagName("td")[1]
+
+    let totalPrice = 0
+
+
+    inputPrice.addEventListener("keydown", function (event) {
+        if ((event.keyCode < 46 || event.keyCode > 57) && (event.keyCode != 8 && event.keyCode != 9 && event.keyCode != 190)) {
+            console.log(event.keyCode)
+            event.preventDefault();
+        }
+    })
+
+    inputAmount.addEventListener("keydown", function (event) {
+        if ((event.keyCode < 46 || event.keyCode > 57) && (event.keyCode != 8 && event.keyCode != 9)) {
+            console.log(event.keyCode)
+            event.preventDefault();
+        }
+    })
+
+    let items = []
+    const item = function (name, price, amount) {
+        this.name = name
+        this.price = Number(price)
+        this.amount = Number(amount)
+        this.total = Math.round((this.price * this.amount) * 100) / 100
+        this.displayDetail = function (idx) {
+            // this.displayDetail = function () {
+            let tr = document.createElement("tr")
+            // Create row
+            let tdRow = document.createElement("td")
+            tdRow.innerHTML = `${Number(idx) + 1}`
+            tr.appendChild(tdRow)
+            // Create name
+            let tdName = document.createElement("td")
+            tdName.innerHTML = `${this.name}`
+            tr.appendChild(tdName)
+            // Create price
+            let tdPrice = document.createElement("td")
+            tdPrice.innerHTML = `${this.price}`
+            tr.appendChild(tdPrice)
+            // Create amount
+            let tdAmount = document.createElement("td")
+            tdAmount.innerHTML = `${this.amount}`
+            tr.appendChild(tdAmount)
+            // Create total
+            let tdTotal = document.createElement("td")
+            tdTotal.innerHTML = `${this.total}`
+            tr.appendChild(tdTotal)
+            // Create remove
+            let tdRemove = document.createElement("td")
+            tdRemove.innerHTML = `<button onclick="removeItem(this)">remove</button>`
+            tr.appendChild(tdRemove)
+            return tr
+        }
+    }
+
+    function addItem() {
+        tbody.innerHTML = ""
+
+        if (inputName.value && inputPrice.value && inputAmount.value) {
+            let nameValue = inputName.value
+            let priceValue = inputPrice.value
+            let amountValue = inputAmount.value
+            newItem = new item(nameValue, priceValue, amountValue)
+            items.push(newItem)
+            for (idx in items) {
+                tbody.appendChild(items[idx].displayDetail(idx))
+            }
+            calTotal(newItem.total)
+            return
+        } else {
+            return
+        }
+
+        function calTotal(total) {
+            totalPrice += total
+            tdTotalPrice.innerHTML = `${totalPrice}`
+            tdTotalPrice.innerHTML = `${Math.round(totalPrice * 100) / 100}`
+            return
+        }
+    }
+
+    function removeItem(btn) {
+        let tr = btn.parentNode.parentNode
+        let rowIndex = Number(tr.firstChild.textContent) - 1
+        totalPrice = Math.round((totalPrice - items[rowIndex].total) * 100) / 100
+        items.splice(rowIndex, 1)
+        tr.remove()
+        reRender()
+    }
+
+    function reRender() {
+        tbody.innerHTML = ""
+        for (idx in items) {
+            tbody.appendChild(items[idx].displayDetail(idx))
+        }
+        tdTotalPrice.innerHTML = `${totalPrice}`
+    }
+</script>
+
+</html>

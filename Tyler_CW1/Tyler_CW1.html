@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    let body = document.getElementsByTagName("body")[0]
+    body.innerHTML += "<input type='password' value='password'/>"
+    body.innerHTML += "<button type='submit' onClick='switchDisplay()'>show password</button>"
+
+    let input = document.getElementsByTagName("input")[0]
+    let button = document.getElementsByTagName("button")[0]
+
+    function switchDisplay() {
+        if (input.type == 'text') {
+            input.type = 'password'
+            button.innerText = "show password"
+        } else {
+            input.type = 'text'
+            button.innerText = "hide password"
+        }
+    }
+
+</script>
+
+</html>
