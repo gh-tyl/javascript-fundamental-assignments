@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous">
+        </script>
+    <style>
+        #box {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: relative;
+            left: 0px;
+            top: 0px;
+        }
+    </style>
+</head>
+
+<doc>
+
+    <div id="box"></div>
+
+</doc>
+<script>
+    // Move the selected box on the document using the arrow keys. 
+    // If the box touched the edges of the document, destroy it.
+
+    // get document
+    var doc = $(document);
+    var docWidth = $(doc).width();
+    var docHeight = $(doc).height();
+    // get box
+    var box = $('#box');
+
+    $(doc).on({
+        keydown: function (e) {
+
+            if (e.which == 37) {
+                // left
+                box.css('left', parseInt(box.css('left')) - 100);
+            } else if (e.which == 38) {
+                // up
+                box.css('top', parseInt(box.css('top')) - 100);
+            } else if (e.which == 39) {
+                // right
+                box.css('left', parseInt(box.css('left')) + 100);
+            } else if (e.which == 40) {
+                // down
+                box.css('top', parseInt(box.css('top')) + 100);
+            }
+
+            // if box is outside of doc, remove box
+            if (parseInt(box.css('left')) < 0 || parseInt(box.css('top')) < 0 || parseInt(box.css('left')) > (docWidth - box.width()) || parseInt(box.css('top')) > (docHeight - box.height())) {
+                box.remove();
+                // restart button
+                // let box = $("<div></div>");
+                // is button is not exist, create button
+                // if ($('#btn').length == 0) {
+                //     let button = $("<button>Click to restart</button>");
+                //     button.attr('id', 'btn');
+                //     button.on('click', function () {
+                //         box = $("<div></div>");
+                //         box.css('width', '100px');
+                //         box.css('height', '100px');
+                //         box.css('background-color', 'red');
+                //         box.css('position', 'relative');
+                //         box.css('left', '0px');
+                //         box.css('top', '0px');
+                //         $('doc').append(box);
+                //         this.remove();
+                //     });
+                //     $('doc').append(button);
+                // }
+                box = $("<div></div>");
+                box.css('width', '100px');
+                box.css('height', '100px');
+                box.css('background-color', 'red');
+                box.css('position', 'relative');
+                box.css('left', '0px');
+                box.css('top', '0px');
+                $('doc').append(box);
+            }
+        }
+    })
+</script>
+
+</html>
