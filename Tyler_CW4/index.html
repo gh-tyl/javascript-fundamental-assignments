@@ -8,11 +8,57 @@
     <!-- jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Document</title>
+    <style>
+        .container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .left {
+            width: 50%;
+        }
+
+        .right {
+            width: 50%;
+        }
+
+        tr {
+            cursor: pointer;
+        }
+
+        tr:hover {
+            background-color: lightgray;
+        }
+    </style>
 </head>
 
 <body>
-    <div>
-
+    <div class="container">
+        <div class="left">
+            <div class="row justify-content-center align-items-center g-2">
+                <div>
+                    <input id="Namesrc" placeholder="write item name" />
+                </div>
+            </div>
+            <div class="row justify-content-center align-items-center g-2">
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Item Name</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="right" id="shopcr">
+        </div>
     </div>
 </body>
 <script src="./js/index.js"></script>
