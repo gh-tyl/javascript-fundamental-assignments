@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TylerJS1Final001</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div id="modal">
+        <!-- Modal content -->
+        <div id="modal-contents">
+            <span class="close">&times;</span>
+            <div id="modal-content">
+                <table>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <div id="main">
+        <!-- select -->
+        <select id="filter">
+            <option value="all">Select filter</option>
+        </select>
+        <!-- <button id="loadBtn" type="button">Load table</button> -->
+        <table>
+            <thead>
+                <tr>
+                    <!-- show id, first_name, last_name, email, phone, gender, position, department, salary -->
+                    <th>id</th>
+                    <th>first_name</th>
+                    <th>last_name</th>
+                    <th>email</th>
+                    <th>phone</th>
+                    <th>gender</th>
+                    <th>position</th>
+                    <th>department</th>
+                    <th>salary</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    <!-- <th><button type="button" on-click="editBtn">Edit</button></th> -->
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+</body>
+<script src="./js/index.js"></script>
+
+</html>
